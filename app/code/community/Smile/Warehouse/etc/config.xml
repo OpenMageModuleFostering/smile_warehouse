@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Smile_Warehouse>
+            <version>0.0.5</version>
+        </Smile_Warehouse>
+    </modules>
+
+    <global>
+        <models>
+            <smile_warehouse>
+                <class>Smile_Warehouse_Model</class>
+                <resourceModel>smile_warehouse_mysql4</resourceModel>
+            </smile_warehouse>
+
+            <cataloginventory>
+                <rewrite>
+                    <stock_item>Smile_Warehouse_Model_Stock_Item</stock_item>
+                    <observer>Smile_Warehouse_Model_Observer</observer>
+                    <stock>Smile_Warehouse_Model_Stock</stock>
+                </rewrite>
+            </cataloginventory>
+
+            <cataloginventory_mysql4>
+                <rewrite>
+                    <stock_status>Smile_Warehouse_Model_Mysql4_Stock_Status</stock_status>
+                    <stock>Smile_Warehouse_Model_Mysql4_Stock</stock>
+                    <stock_item>Smile_Warehouse_Model_Mysql4_Stock_Item</stock_item>
+                </rewrite>
+            </cataloginventory_mysql4>
+
+            <catalog>
+                <rewrite>
+                    <convert_parser_product>Smile_Warehouse_Model_Catalog_Convert_Parser_Product</convert_parser_product>
+                </rewrite>
+            </catalog>
+
+            <reports_mysql4>
+                <rewrite>
+                    <product_lowstock_collection>Smile_Warehouse_Model_Mysql4_Reports_Product_Lowstock_Collection</product_lowstock_collection>
+                </rewrite>
+            </reports_mysql4>
+
+            <smile_warehouse_mysql4>
+                <class>Smile_Warehouse_Model_Mysql4</class>
+            </smile_warehouse_mysql4>
+        </models>
+
+        <resources>
+            <smile_warehouse_setup>
+                <setup>
+                    <module>Smile_Warehouse</module>
+                    <class>Smile_Warehouse_Model_Mysql4_Setup</class>
+                </setup>
+            </smile_warehouse_setup>
+        </resources>
+
+        <blocks>
+            <smile_warehouse>
+                <class>Smile_Warehouse_Block</class>
+            </smile_warehouse>
+            <adminhtml>
+                <rewrite>
+                    <catalog_product_edit_tab_inventory>Smile_Warehouse_Block_Adminhtml_Catalog_Product_Edit_Tab_Inventory</catalog_product_edit_tab_inventory>
+                    <catalog_product_edit_tab_super_config>Smile_Warehouse_Block_Adminhtml_Catalog_Product_Edit_Tab_Super_Config</catalog_product_edit_tab_super_config>
+                    <report_product_lowstock_grid>Smile_Warehouse_Block_Adminhtml_Report_Product_Lowstock_Grid</report_product_lowstock_grid>
+                    <catalog_product_edit_tab_super_config_simple>Smile_Warehouse_Block_Adminhtml_Catalog_Product_Edit_Tab_Super_Config_Simple</catalog_product_edit_tab_super_config_simple>
+                    <system_store_grid>Smile_Warehouse_Block_Adminhtml_System_Store_Grid</system_store_grid>
+                </rewrite>
+            </adminhtml>
+            <rss>
+                <rewrite>
+                    <catalog_notifyStock>Smile_Warehouse_Block_Rss_Catalog_NotifyStock</catalog_notifyStock>
+                </rewrite>
+            </rss>
+        </blocks>
+
+        <helpers>
+            <smile_warehouse>
+                <class>Smile_Warehouse_Helper</class>
+            </smile_warehouse>
+        </helpers>
+    </global>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Smile_Warehouse before="Mage_Adminhtml">Smile_Warehouse_Adminhtml</Smile_Warehouse>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+        <fieldsets>
+            <catalog_product_dataflow>
+                <stock_location>
+                    <inventory>1</inventory>
+                    <product_type>
+                        <simple />
+                        <virtual />
+                        <configurable />
+                        <grouped />
+                    </product_type>
+                </stock_location>
+                <stock_code>
+                    <inventory>1</inventory>
+                    <product_type>
+                        <simple />
+                        <virtual />
+                        <configurable />
+                        <grouped />
+                    </product_type>
+                </stock_code>
+            </catalog_product_dataflow>
+        </fieldsets>
+    </admin>
+
+    <adminhtml>
+        <events>
+            <adminhtml_block_html_before>
+                <observers>
+                    <smile_warehouse_website_edit_form_observer>
+                        <class>smile_warehouse/observer</class>
+                        <method>addWarehouseField</method>
+                    </smile_warehouse_website_edit_form_observer>
+                    <smile_warehouse_add_product_grid_all_stocks_qty>
+                        <class>smile_warehouse/observer</class>
+                        <method>addAllStocksQtyColumn</method>
+                    </smile_warehouse_add_product_grid_all_stocks_qty>
+                    <smile_warehouse_product_grid_block_html_before>
+                        <class>smile_warehouse/observer</class>
+                        <method>unsetProductGridFlag</method>
+                    </smile_warehouse_product_grid_block_html_before>
+                </observers>
+            </adminhtml_block_html_before>
+
+            <catalog_product_website_update>
+                <observers>
+                    <smile_warehouse_update_products_websites_observer>
+                        <class>smile_warehouse/observer</class>
+                        <method>updateProductsWebsites</method>
+                    </smile_warehouse_update_products_websites_observer>
+                </observers>
+            </catalog_product_website_update>
+
+            <website_save_after>
+                <observers>
+                    <smile_warehouse_reassign_stock_observer>
+                        <class>smile_warehouse/observer</class>
+                        <method>reassignStock</method>
+                    </smile_warehouse_reassign_stock_observer>
+                </observers>
+            </website_save_after>
+
+            <catalog_product_save_before>
+                <observers>
+                    <smile_warehouse_catalog_product_save_before>
+                        <class>smile_warehouse/observer</class>
+                        <method>importProductByStockCode</method>
+                    </smile_warehouse_catalog_product_save_before>
+                </observers>
+            </catalog_product_save_before>
+
+            <core_layout_block_create_after>
+                <observers>
+                    <smile_warehouse_catalog_product_grid_block_create_after>
+                        <class>smile_warehouse/observer</class>
+                        <method>setProductGridFlag</method>
+                    </smile_warehouse_catalog_product_grid_block_create_after>
+                </observers>
+            </core_layout_block_create_after>
+
+            <catalog_product_collection_load_before>
+                <observers>
+                    <smile_warehouse_catalog_product_collection_load_before>
+                        <class>smile_warehouse/observer</class>
+                        <method>fixProductCollectionStockJoin</method>
+                    </smile_warehouse_catalog_product_collection_load_before>
+                </observers>
+            </catalog_product_collection_load_before>
+
+        </events>
+
+        <layout>
+            <updates>
+                <smile_warehouse>
+                    <file>smile/warehouse.xml</file>
+                </smile_warehouse>
+            </updates>
+        </layout>
+
+    </adminhtml>
+</config>

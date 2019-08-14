@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_catalog_product_action_attribute_edit>
+        <reference name="attributes_tabs">
+            <block type="adminhtml/catalog_product_edit_action_attribute_tab_inventory" name="tab_inventory" template="smile/warehouse/catalog/product/edit/action/inventory.phtml" />
+            <action method="addTab"><name>inventory</name><block>tab_inventory</block></action>
+        </reference>
+    </adminhtml_catalog_product_action_attribute_edit>
+</layout>

@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<config>
+    <api>
+        <resources>
+            <smile_warehouse_stock_item translate="title" module="smile_warehouse">
+                <model>smile_warehouse/stock_item_api</model>
+                <title>Warehouse API</title>
+                <acl>cataloginventory</acl>
+                <methods>
+                    <update translate="title" module="smile_warehouse">
+                        <title>Update warehouse stock data</title>
+                        <acl>cataloginventory/update</acl>
+                    </update>
+                </methods>
+                <faults module="smile_warehouse">
+                    <not_exists>
+                        <code>101</code>
+                        <message>Product not exists.</message>
+                    </not_exists>
+                    <not_updated>
+                        <code>102</code>
+                        <message>Product inventory not updated. Details in error message.</message>
+                    </not_updated>
+                    <website_not_exists>
+                        <code>103</code>
+                        <message>Website not exists.</message>
+                    </website_not_exists>
+                    <store_not_exists>
+                        <code>104</code>
+                        <message>Store not exists.</message>
+                    </store_not_exists>
+                    <stock_not_exists>
+                        <code>105</code>
+                        <message>Stock not exists.</message>
+                    </stock_not_exists>
+                    <stock_item_not_exists>
+                        <code>106</code>
+                        <message>Stock Item not exists.</message>
+                    </stock_item_not_exists>
+                </faults>
+            </smile_warehouse_stock_item>
+        </resources>
+        <v2>
+            <resources_function_prefix>
+                <smile_warehouse_stock_item>smileWarehouseStockItem</smile_warehouse_stock_item>
+            </resources_function_prefix>
+        </v2>
+    </api>
+</config>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Smile_Warehouse>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_Adminhtml />
+                <Mage_CatalogInventory />
+            </depends>
+        </Smile_Warehouse>
+    </modules>
+</config>

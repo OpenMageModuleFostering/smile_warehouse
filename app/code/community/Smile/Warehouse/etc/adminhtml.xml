@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <menu>
+        <system>
+            <children>
+                <warehouse translate="title">
+                    <title>Manage Warehouses</title>
+                    <action>adminhtml/warehouse/</action>
+                    <sort_order>105</sort_order>
+                </warehouse>
+            </children>
+        </system>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <warehouse translate="title">
+                                <title>Manage Warehouses</title>
+                            </warehouse>
+                        </children>
+                    </system>
+                    <catalog>
+                        <children>
+                            <stock translate="title">
+                                <title>Manage Warehouses Stock</title>
+                            </stock>
+                        </children>
+                    </catalog>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
