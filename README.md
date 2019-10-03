@@ -1,3 +1,5 @@
+
+
 ## Original Package Description
 
 This module gives a possibility to manage several stocks in Magento. 

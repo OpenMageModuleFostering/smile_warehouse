@@ -1,7 +1,7 @@
 {
-    "name": "OpenMageModuleFostering\/Smile_Warehouse",
+    "name": "openmage-module-fostering\/smile_warehouse",
     "type": "magento-module",
-    "license": "Open-Software-License-(OSL-3.0)",
+    "license": "OSL-3.0",
     "homepage": "",
     "description": "This module gives a possibility to manage several stocks in Magento. ",
     "authors": [
